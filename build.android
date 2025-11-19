@@ -54,6 +54,7 @@ cmake "$@" \
     -DANDROID_PLATFORM=android-${ANDROID_API_LEVEL}                             \
     -DANDROID_NDK_VERSION=${CURRENT_NDK_VERSION}                                \
     -DOCOS_BUILD_ANDROID=ON                                                     \
+    -DCMAKE_BUILD_TYPE=${BUILD_CONFIG}                                          \
     "${SCRIPT_DIR}" && cmake --build . --config ${BUILD_CONFIG} --parallel
 popd
 
