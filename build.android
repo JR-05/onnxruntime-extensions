@@ -55,6 +55,13 @@ cmake "$@" \
     -DANDROID_NDK_VERSION=${CURRENT_NDK_VERSION}                                \
     -DOCOS_BUILD_ANDROID=ON                                                     \
     -DCMAKE_BUILD_TYPE=${BUILD_CONFIG}                                          \
+    -DOCOS_ENABLE_VISION=OFF                                                    \
+    -DOCOS_ENABLE_AUDIO=OFF                                                     \
+    -DOCOS_ENABLE_MATH=OFF                                                      \
+    -DOCOS_ENABLE_DLIB=OFF                                                      \
+    -DOCOS_ENABLE_CV2=OFF                                                       \
+    -DOCOS_ENABLE_OPENCV_CODECS=OFF                                             \
+    -DOCOS_ENABLE_CPP_EXCEPTIONS=OFF                                            \
     "${SCRIPT_DIR}" && cmake --build . --config ${BUILD_CONFIG} --parallel
 popd
 
