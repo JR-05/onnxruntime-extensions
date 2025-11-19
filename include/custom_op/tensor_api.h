@@ -587,7 +587,7 @@ private:
      if constexpr (std::is_same<std::tuple_element_t<I, ValueTuple>, T>::value)
        return std::get<I>(entries_);  
      else
-       throw std::runtime_error("name matched but type is not");
+       ORTX_CXX_API_THROW("name matched but type is not", ORT_RUNTIME_EXCEPTION);
     }
     return TryToGetAttributeWithDefaultInternal<I+1>(name, default_value);
   }
