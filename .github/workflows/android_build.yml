@@ -37,27 +37,25 @@ jobs:
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
 
-    - name: Build Android arm64-v8a with 16KB support
+    - name: Build Android
       env:
-        ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+        _BUILD_CFG: ${{ matrix.abi }} out/android/${{ matrix.abi }}/Release
+        NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
       run: |
-        set -e
-        # Use the project's build script
-        python tools/build.py \
-          --android \
-          --android_abi=arm64-v8a \
-          --android_api=27 \
-          --android_home=$ANDROID_HOME \
-          --android_ndk_path=$ANDROID_NDK_HOME \
-          --config=Release \
-          --update \
-          --parallel \
-          --build
+        chmod +x ./build.android
+        ./build.android
 
-    - name: Upload build artifacts
-      if: always()
+    - name: Upload SO artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: android-arm64-libraries
-        path: build/Android/**/lib/*.so
-        retention-days: 7
+        name: libortextensions-${{ matrix.abi }}
+        path: out/android/${{ matrix.abi }}/Release/**/*.so
+        if-no-files-found: error
+
+    - name: Upload AAR artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: onnxruntime-extensions-${{ matrix.abi }}.aar
+        path: out/android/${{ matrix.abi }}/Release/aar_out/*.aar
+        if-no-files-found: warn
+
