@@ -45,6 +45,12 @@ jobs:
         chmod +x ./build.android
         ./build.android
 
+    - name: Strip SO files
+      env:
+        NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
+      run: |
+        find out/android/${{ matrix.abi }}/Release -name "*.so" -exec ${NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-all {} \;
+        
     - name: Upload SO artifacts
       uses: actions/upload-artifact@v4
       with:
