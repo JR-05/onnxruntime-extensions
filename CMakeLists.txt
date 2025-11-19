@@ -218,6 +218,10 @@ if(OCOS_BUILD_ANDROID)
   endif()
 
   set(OCOS_BUILD_JAVA ON CACHE INTERNAL "")
+
+  # Support Android 16kb page size
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,max-page-size=16384")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-z,max-page-size=16384")
 endif()
 
 # Build the libraries with -fPIC
