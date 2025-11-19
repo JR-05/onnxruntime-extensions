@@ -62,6 +62,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: onnxruntime-extensions-${{ matrix.abi }}.aar
-        path: out/android/${{ matrix.abi }}/Release/aar_out/*.aar
+        path: out/android/${{ matrix.abi }}/Release/aar_out/**/*.aar
         if-no-files-found: warn
 
