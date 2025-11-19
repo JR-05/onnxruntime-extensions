@@ -5,7 +5,7 @@ set -e -x -u
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 OSNAME=android
-BUILD_CONFIG=Release
+BUILD_CONFIG=MinSizeRel
 abi_name=x86_64
 target_dir=''
 if [[ -n ${_BUILD_CFG-} ]]; then
